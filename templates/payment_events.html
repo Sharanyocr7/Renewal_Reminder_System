@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="page-title">Payment Events</h2>
+
+<div class="card">
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Vendor</th>
+                    <th>PO No</th>
+                    <th>Payment Due Date</th>
+                    <th>Source Text</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.vendor_name }}</td>
+                    <td>{{ row.po_no }}</td>
+                    <td>{{ row.payment_due_date }}</td>
+                    <td>{{ row.source_text }}</td>
+                    <td>{{ row.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="page-title">Upload Renewal Excel</h2>
+
+<form method="POST" enctype="multipart/form-data" class="card p-3 mb-4">
+    <div class="mb-3">
+        <label class="form-label">Choose Excel File</label>
+        <input type="file" class="form-control" name="file" accept=".xlsx,.xls" required>
+    </div>
+    <button type="submit" class="btn btn-primary me-2">Preview File</button>
+    <button type="submit" name="save_data" value="1" class="btn btn-success">Save / Update Contracts</button>
+</form>
+
+{% if validation_issues %}
+<div class="card mb-4">
+    <div class="card-header bg-danger text-white">Validation Issues</div>
+    <div class="card-body">
+        <ul>
+            {% for issue in validation_issues %}
+            <li>{{ issue }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+
+{% if preview_rows %}
+<div class="card">
+    <div class="card-header">Preview</div>
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    {% for key in preview_rows[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in preview_rows %}
+                <tr>
+                    {% for value in row.values() %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

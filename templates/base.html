@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #082b4d, #0d3b66) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+        }
+
+        .navbar .nav-link {
+            color: rgba(255,255,255,0.92) !important;
+            margin-right: 10px;
+        }
+
+        .navbar .nav-link:hover {
+            color: #ffffff !important;
+        }
+
+        .page-title {
+            font-weight: 800;
+            color: #082b4d;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #5b6777;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-banner {
+            padding: 26px 30px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #0d3b66, #1666a9);
+            color: white;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.14);
+        }
+
+        .hero-banner h1 {
+            margin: 0 0 8px 0;
+            font-weight: 800;
+        }
+
+        .hero-banner p {
+            margin: 0;
+            color: rgba(255,255,255,0.88);
+        }
+
+        .metric-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .metric-topbar {
+            height: 5px;
+        }
+
+        .metric-card .card-body {
+            padding: 20px;
+        }
+
+        .metric-label {
+            color: #5b6777;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .metric-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #082b4d;
+        }
+
+        .glass-card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+        }
+
+        .chart-title {
+            font-weight: 700;
+            color: #082b4d;
+            margin-bottom: 14px;
+        }
+
+        .table-wrap {
+            max-height: 420px;
+            overflow-y: auto;
+        }
+
+        .table thead th {
+            position: sticky;
+            top: 0;
+            background: #eef3f8;
+            z-index: 1;
+        }
+
+        .section-gap {
+            margin-top: 80px;
+        }
+
+        .status-badge {
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .status-overdue {
+            background: #fde2e1;
+            color: #b42318;
+        }
+
+        .status-7 {
+            background: #fff1d6;
+            color: #b54708;
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.7s ease both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px 0 30px;
+            color: #5b6777;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}">{{ app_name }}</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a class="nav-link" href="{{ url_for('upload') }}">Upload Excel</a>
+                <a class="nav-link" href="{{ url_for('upload_history') }}">Upload History</a>
+                <a class="nav-link" href="{{ url_for('contracts') }}">Contracts</a>
+                <a class="nav-link" href="{{ url_for('payment_events') }}">Payment Events</a>
+                <a class="nav-link" href="{{ url_for('reminder_logs') }}">Reminder Logs</a>
+            </div>
+     </div>
+    </nav>
+
+    <div class="container-fluid px-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        Gharda Renewal Reminder System
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

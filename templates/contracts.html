@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="page-title">Contracts</h2>
+
+<form method="GET" class="card p-3 mb-4">
+    <div class="row g-3">
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="vendor" placeholder="Vendor">
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="location" placeholder="Location">
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="search" placeholder="Search Vendor / PO / Contact / Service">
+        </div>
+        <div class="col-md-2">
+            <select class="form-select" name="due_status">
+                <option value="">All</option>
+                <option value="overdue">Overdue</option>
+                <option value="7">Due in 7 Days</option>
+                <option value="15">Due in 15 Days</option>
+                <option value="30">Due in 30 Days</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary w-100">Apply</button>
+        </div>
+    </div>
+</form>
+
+<div class="card">
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Vendor</th>
+                    <th>PO No</th>
+                    <th>Service</th>
+                    <th>Location</th>
+                    <th>PO Expiry</th>
+                    <th>Days Left</th>
+                    <th>Payment Schedule</th>
+                    <th>Payment Dates</th>
+                    <th>Renewal Amount</th>
+                    <th>Total Amount</th>
+                    <th>Contact Person</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.vendor_name }}</td>
+                    <td>{{ row.po_no }}</td>
+                    <td>{{ row.service_type }}</td>
+                    <td>{{ row.location }}</td>
+                    <td>{{ row.po_expiry_date }}</td>
+                    <td>{{ row.days_left }}</td>
+                    <td>{{ row.payment_schedule }}</td>
+                    <td>{{ row.payment_schedule_date_raw }}</td>
+                    <td>{{ row.renewal_amount }}</td>
+                    <td>{{ row.total_amount }}</td>
+                    <td>{{ row.contact_person }}</td>
+                    <td>{{ row.email_id }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

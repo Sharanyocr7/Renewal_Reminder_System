@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="page-title mb-0">Reminder Logs</h2>
+    <form method="POST" action="{{ url_for('run_reminders') }}">
+        <button type="submit" class="btn btn-success">Run Reminder Engine</button>
+    </form>
+</div>
+
+<div class="card">
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Vendor</th>
+                    <th>PO No</th>
+                    <th>Reminder Type</th>
+                    <th>Target Date</th>
+                    <th>Days Left</th>
+                    <th>Recipient</th>
+                    <th>Status</th>
+                    <th>Sent At</th>
+                    <th>Error</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.vendor_name }}</td>
+                    <td>{{ row.po_no }}</td>
+                    <td>{{ row.reminder_type }}</td>
+                    <td>{{ row.target_date }}</td>
+                    <td>{{ row.days_left }}</td>
+                    <td>{{ row.recipient_email }}</td>
+                    <td>{{ row.status }}</td>
+                    <td>{{ row.sent_at }}</td>
+                    <td>{{ row.error_message }}</td>
+                    <td>{{ row.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
